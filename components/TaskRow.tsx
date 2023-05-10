@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { CheckBox } from "./CheckBox";
+import { CheckTask } from "./CheckTask";
 import { CommonStyles } from "../styles/CommonStyles";
+import { AddRow } from "./AddRow";
 
 export const TaskRow = (props: { countable: any, changeCounts: any, index: number }) => (
   <View style={CommonStyles.row}>
@@ -10,16 +11,10 @@ export const TaskRow = (props: { countable: any, changeCounts: any, index: numbe
       <Text style={CommonStyles.textItem}>{props.countable.count}</Text>
     </View>
     <View style={styles.buttonColumn}>
-      <CheckBox
+      <CheckTask
         text="+"
         submit={() => {
           props.changeCounts(1, props.index);
-        }}
-      />
-      <CheckBox
-        text="-"
-        submit={() => {
-          props.changeCounts(-1, props.index);
         }}
       />
     </View>

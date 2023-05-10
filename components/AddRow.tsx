@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, TextInput, Keyboard, StyleSheet } from "react-native";
 
-import { CheckBox } from "./CheckBox";
+import { CheckTask } from "./CheckTask";
 
 export const AddRow = (props: { addNewCountable: any }) => {
   const [name, setName] = useState("");
@@ -12,8 +12,7 @@ export const AddRow = (props: { addNewCountable: any }) => {
         placeholder="Enter a name"
         onChangeText={setName}
       />
-      <CheckBox
-        style={styles.button}
+      <CheckTask
         text="Add"
         submit={() => {
           props.addNewCountable(name);

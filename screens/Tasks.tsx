@@ -6,10 +6,12 @@ import {
   KeyboardAvoidingView,
   View,
   Platform,
+  Text,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { CheckBox } from "../components/CheckBox";
+import { CheckTask } from "../components/CheckTask";
 import { TaskRow }  from "../components/TaskRow";
 import { loadCountables, saveCountables } from "../storage/Storage";
 
@@ -18,7 +20,7 @@ const intialCountables = [
   { name: "Woodpecker", count: 3 },
 ];
 
-export default function Tasks() {
+export const Tasks = (props: {navigation: any}) => {
   const [countables, setCountables] = useState(intialCountables);
 
   useEffect(() => {
@@ -82,6 +84,9 @@ export default function Tasks() {
           <View style={{ flex: 1 }} />
         </ScrollView>
         <StatusBar style="auto" />
+        <TouchableOpacity style={styles.addButton} onPress={() => props.navigation.navigate("CreateTask")}>
+          <Text style={styles.text}>add</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -93,4 +98,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "flex-end",
   },
+  addButton: {
+    backgroundColor: "#6BA3B9",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 40,
+  }
 });
