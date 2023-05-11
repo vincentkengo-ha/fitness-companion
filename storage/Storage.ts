@@ -1,4 +1,4 @@
-import { AsyncStorage } from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const saveCountables = async (countables: any) => {
   const jsonCountables = JSON.stringify(countables);
