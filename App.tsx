@@ -10,15 +10,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Tasks">
-       <Stack.Screen
-          name="Tasks"
-          component={Tasks}
-        />
-        <Stack.Screen
-          name="CreateTask"
-          component={CreateTask}
-        />
-     </Stack.Navigator>
+        <Stack.Screen name="Tasks" component={Tasks} />
+        <Stack.Screen name="CreateTask" component={CreateTask} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

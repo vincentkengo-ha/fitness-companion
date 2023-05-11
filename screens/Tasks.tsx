@@ -12,7 +12,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { CheckTask } from "../components/CheckTask";
-import { TaskRow }  from "../components/TaskRow";
+import { TaskRow } from "../components/TaskRow";
 import { loadCountables, saveCountables } from "../storage/Storage";
 
 const intialCountables = [
@@ -20,7 +20,8 @@ const intialCountables = [
   { name: "Woodpecker", count: 3 },
 ];
 
-export const Tasks = (props: {navigation: any}) => {
+export const Tasks = (props: { navigation: any }) => {
+  console.log(typeof(props.navigation))
   const [countables, setCountables] = useState(intialCountables);
 
   useEffect(() => {
@@ -84,13 +85,16 @@ export const Tasks = (props: {navigation: any}) => {
           <View style={{ flex: 1 }} />
         </ScrollView>
         <StatusBar style="auto" />
-        <TouchableOpacity style={styles.addButton} onPress={() => props.navigation.navigate("CreateTask")}>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => props.navigation.navigate("CreateTask")}
+        >
           <Text style={styles.text}>add</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -105,5 +109,5 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
-  }
+  },
 });
