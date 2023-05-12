@@ -2,7 +2,7 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 import { CommonStyles } from "../styles/CommonStyles";
 
-export const CheckTask = (props: { text: string; submit: any }) => (
+export const CheckTask = (props: { text: string, submit: any }) => (
   <TouchableOpacity style={styles.button} onPress={props.submit}>
     <Text style={CommonStyles.textItem}>{props.text}</Text>
   </TouchableOpacity>

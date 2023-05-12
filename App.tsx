@@ -11,7 +11,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Tasks">
         <Stack.Screen name="Tasks" component={Tasks} />
-        <Stack.Screen name="CreateTask" component={CreateTask} />
+        <Stack.Screen name="CreateTask" component={CreateTask}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

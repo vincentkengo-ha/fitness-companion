@@ -17,8 +17,6 @@ export const AddRow = (props: { addNewCountable: any }) => {
         submit={() => {
           props.addNewCountable(name);
           Keyboard.dismiss();
-          // no work :(
-          setName("");
         }}
       />
     </View>

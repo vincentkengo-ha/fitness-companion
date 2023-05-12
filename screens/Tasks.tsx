@@ -21,8 +21,12 @@ const intialCountables = [
 ];
 
 export const Tasks = (props: { navigation: any }) => {
-  console.log(typeof(props.navigation))
   const [countables, setCountables] = useState(intialCountables);
+
+  //Delete when user can add countables
+  if (countables.length === 0) {
+    setCountables(intialCountables);
+  }
 
   useEffect(() => {
     loadCountables().then((result) => setCountables(result));
@@ -87,6 +91,8 @@ export const Tasks = (props: { navigation: any }) => {
         <StatusBar style="auto" />
         <TouchableOpacity
           style={styles.addButton}
+          //addNewCountable can't be sent because it's a function.
+          //todo: find a solution to this
           onPress={() => props.navigation.navigate("CreateTask")}
         >
           <Text style={styles.text}>add</Text>
@@ -109,5 +115,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
+    color: "#fff",
   },
 });
