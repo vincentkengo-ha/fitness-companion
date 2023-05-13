@@ -8,6 +8,7 @@ export const TaskRow = (props: { countable: any, changeCounts: any, index: numbe
   <View style={CommonStyles.row}>
     <View style={styles.nameColumn}>
       <Text style={CommonStyles.textItem}>{props.countable.name}</Text>
+      <Text style={CommonStyles.descriptionText}>{props.countable.description}</Text>
       <Text style={CommonStyles.textItem}>{props.countable.count}</Text>
     </View>
     <View style={styles.buttonColumn}>

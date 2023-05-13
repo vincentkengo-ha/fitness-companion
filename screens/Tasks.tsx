@@ -16,8 +16,8 @@ import { TaskRow } from "../components/TaskRow";
 import { loadCountables, saveCountables } from "../storage/Storage";
 
 const intialCountables = [
-  { name: "Crow", count: 0 },
-  { name: "Woodpecker", count: 3 },
+  { name: "Crow", count: 0, description: "Smart" },
+  { name: "Woodpecker", count: 3, description: "Brrrrr"},
 ];
 
 export const Tasks = (props: { navigation: any }) => {
@@ -42,7 +42,7 @@ export const Tasks = (props: { navigation: any }) => {
     saveCountables(newState);
   };
 
-  const addNewCountable = (name: string) => {
+  const addNewCountable = (name: string, description: string) => {
     if (
       (countables.some((c) => c.name === name) && countables.length > 0) ||
       name.length === 0
@@ -50,7 +50,7 @@ export const Tasks = (props: { navigation: any }) => {
       name = "";
       return;
     }
-    const newState = [...countables, { name, count: 0 }];
+    const newState = [...countables, { name, count: 0, description }];
     newState.sort(function (a, b) {
       if (a.name < b.name) {
         return -1;
