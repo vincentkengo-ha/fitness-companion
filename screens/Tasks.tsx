@@ -8,6 +8,7 @@ import {
   Platform,
   Text,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,7 +18,7 @@ import { loadCountables, saveCountables } from "../storage/Storage";
 
 const intialCountables = [
   { name: "Crow", count: 0, description: "Smart" },
-  { name: "Woodpecker", count: 3, description: "Brrrrr"},
+  { name: "Woodpecker", count: 3, description: "Brrrrr" },
 ];
 
 export const Tasks = (props: { navigation: any }) => {
@@ -89,6 +90,14 @@ export const Tasks = (props: { navigation: any }) => {
           <View style={{ flex: 1 }} />
         </ScrollView>
         <StatusBar style="auto" />
+
+        <TouchableOpacity
+          //Temporary for testing purposes
+          style={styles.addButton}
+          onPress={() => props.navigation.navigate("Run")}
+        >
+          <Text style={styles.text}>run</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.addButton}
           //addNewCountable can't be sent because it's a function.
