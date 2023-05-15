@@ -8,7 +8,6 @@ import {
   Platform,
   Text,
   TouchableOpacity,
-  Button,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -25,9 +24,10 @@ export const Tasks = (props: { navigation: any }) => {
   const [countables, setCountables] = useState(intialCountables);
 
   //Delete when user can add countables
-  if (countables.length === 0) {
-    setCountables(intialCountables);
-  }
+  // if (countables.length === 0) {
+  //   setCountables(intialCountables);
+  // }
+  console.log(countables, "Tasks")
 
   useEffect(() => {
     loadCountables().then((result) => setCountables(result));
@@ -39,28 +39,6 @@ export const Tasks = (props: { navigation: any }) => {
       return;
     }
     newState[index].count += amount;
-    setCountables(newState);
-    saveCountables(newState);
-  };
-
-  const addNewCountable = (name: string, description: string) => {
-    if (
-      (countables.some((c) => c.name === name) && countables.length > 0) ||
-      name.length === 0
-    ) {
-      name = "";
-      return;
-    }
-    const newState = [...countables, { name, count: 0, description }];
-    newState.sort(function (a, b) {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    });
     setCountables(newState);
     saveCountables(newState);
   };
@@ -100,8 +78,6 @@ export const Tasks = (props: { navigation: any }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.addButton}
-          //addNewCountable can't be sent because it's a function.
-          //todo: find a solution to this
           onPress={() => props.navigation.navigate("CreateTask")}
         >
           <Text style={styles.text}>add</Text>

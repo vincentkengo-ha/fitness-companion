@@ -6,3 +6,9 @@ export function defaultLocation() {
     'latitude': latitude,
   };
 }
+
+export type Countable = {
+  name: string;
+  count: number;
+  description?: string;
+}

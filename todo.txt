@@ -2,3 +2,6 @@ implement CreateTask
 remove unnecessary code
 add new countable in CreateTask
 make the Run screen
+
+Porblems:
+    how to reload Tasks screen after pressing save in CreateTask

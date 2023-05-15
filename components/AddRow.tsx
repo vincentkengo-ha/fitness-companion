@@ -5,6 +5,8 @@ import { CheckTask } from "./CheckTask";
 
 export const AddRow = (props: { addNewCountable: any }) => {
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -12,10 +14,15 @@ export const AddRow = (props: { addNewCountable: any }) => {
         placeholder="Enter a name"
         onChangeText={setName}
       />
+      <TextInput
+        style={styles.textField}
+        placeholder="Description (optional)" 
+        onChangeText={setDescription}
+      />
       <CheckTask
         text="Add"
         submit={() => {
-          props.addNewCountable(name);
+          props.addNewCountable(name, description);
           Keyboard.dismiss();
         }}
       />
