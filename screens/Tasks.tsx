@@ -8,6 +8,7 @@ import {
   Platform,
   Text,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -27,11 +28,20 @@ export const Tasks = (props: { navigation: any }) => {
   // if (countables.length === 0) {
   //   setCountables(intialCountables);
   // }
-  console.log(countables, "Tasks")
+  console.log(countables, "Tasks");
 
   useEffect(() => {
     loadCountables().then((result) => setCountables(result));
   }, []);
+
+  useEffect(() => {
+    const focusHandler = props.navigation.addListener("focus", () => {
+      loadCountables().then((result) => setCountables(result));
+      // Alert.alert("Refreshed");
+    });
+
+    return focusHandler;
+  }, [props.navigation]);
 
   const changeCounts = (amount: number, index: number) => {
     const newState = [...countables];

@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 
 import { Countable } from "../utils/vars";
 import { loadCountables, saveCountables } from "../storage/Storage";
-import { AddRow } from "../components/AddRow";
 
 const intialCountables = [
   { name: "Crow", count: 0, description: "Smart" },
