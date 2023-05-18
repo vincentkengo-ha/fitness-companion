@@ -73,6 +73,7 @@ export const Tasks = (props: { navigation: any }) => {
               key={countable.name}
               changeCounts={changeCounts}
               index={index}
+              navigation={props.navigation}
             />
           ))}
           <View style={{ flex: 1 }} />
