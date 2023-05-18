@@ -6,7 +6,7 @@ import { CommonStyles } from "../styles/CommonStyles";
 // TouchableOpacity onPress always changes the current screen to EditTask screen
 export const TaskRow = (props: {
   navigation: any;
-  countable: any;
+  countables: any;
   changeCounts: any;
   index: number;
 }) => (
@@ -15,17 +15,16 @@ export const TaskRow = (props: {
       style={styles.nameColumn}
       onPress={() =>
         props.navigation.navigate("EditTask", {
+          countables: props.countables,
           index: props.index,
-          name: props.countable.name,
-          description: props.countable.description,
         })
       }
     >
-      <Text style={CommonStyles.textItem}>{props.countable.name}</Text>
+      <Text style={CommonStyles.textItem}>{props.countables[props.index].name}</Text>
       <Text style={CommonStyles.descriptionText}>
-        {props.countable.description}
+        {props.countables[props.index].description}
       </Text>
-      <Text style={CommonStyles.textItem}>{props.countable.count}</Text>
+      <Text style={CommonStyles.textItem}>{props.countables[props.index].count}</Text>
     </TouchableOpacity>
 
     <View style={styles.buttonColumn}>

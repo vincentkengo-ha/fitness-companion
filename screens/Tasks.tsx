@@ -69,7 +69,7 @@ export const Tasks = (props: { navigation: any }) => {
         <ScrollView>
           {countables.map((countable, index) => (
             <TaskRow
-              countable={countable}
+              countables={countables}
               key={countable.name}
               changeCounts={changeCounts}
               index={index}

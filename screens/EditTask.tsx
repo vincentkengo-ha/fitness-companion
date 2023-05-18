@@ -1,17 +1,40 @@
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { useState } from "react";
 
 // Pass in a task and edit it
 export const EditTask = (props: { navigation: any }) => {
   const route = useRoute();
   // @ts-ignore
-  const { index, name, description } = route.params;
+  const { countables, index } = route.params;
+  const name = countables[index].name;
+  const description = countables[index].description;
+  const [newName, setName] = useState("");
+  const [newDescription, setDescription] = useState("");
+
+  const saveChanges = (name: string, description: string, index: number) => {
+
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{name}</Text>
-      <Text style={styles.text}>{description}</Text>
-      <Text style={styles.text}>{index}</Text>
+      <TextInput
+        style={styles.text}
+        placeholder={name}
+        onChangeText={setName}
+      />
+      <TextInput
+        style={styles.text}
+        placeholder={description}
+        onChangeText={setDescription}
+      />
+
     </View>
   );
 };
