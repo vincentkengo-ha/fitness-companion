@@ -1,20 +1,21 @@
-//Copied from https://gist.github.com/jonasgroendahl/c4fad8fa48f955b993d928e1c36d76f7
-
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
-import BackgroundGeolocation from "@mauron85/react-native-background-geolocation";
+import * as Location from "expo-location";
 import { defaultLocation } from "../utils/vars";
 import { getDistanceFromLatLonInKm } from "../utils/getDistance";
 
-const useTracking = (isActive: boolean) => {
+const useExpoTracking = (isActive: boolean) => {
   const [location, setLocation] = useState(defaultLocation);
   const [history, setHistory] = useState<any>([]);
   const [distance, setDistance] = useState<number>(0);
+
+    
 
   useEffect(() => {
     if (!isActive) {
       return;
     }
+    Location.Accuracy = "High";
     BackgroundGeolocation.configure({
       desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       stationaryRadius: 50,
@@ -158,8 +159,4 @@ const useTracking = (isActive: boolean) => {
       BackgroundGeolocation.removeAllListeners();
     };
   }, [location, isActive]);
-
-  return { location, history, distance };
 };
-
-export default useTracking;

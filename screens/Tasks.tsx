@@ -83,9 +83,9 @@ export const Tasks = (props: { navigation: any }) => {
         <TouchableOpacity
           //Temporary for testing purposes
           style={styles.addButton}
-          onPress={() => props.navigation.navigate("Run")}
+          onPress={() => props.navigation.navigate("Gps")}
         >
-          <Text style={styles.text}>run</Text>
+          <Text style={styles.text}>gps (test)</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.addButton}
