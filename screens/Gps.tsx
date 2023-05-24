@@ -3,15 +3,25 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
 import { getDistanceFromLatLonInKm } from "../utils/getDistance";
+import { useStopwatch } from "react-use-precision-timer";
 
 export const Gps = () => {
   const LOCATION_TASK = "background-location-task";
 
+  const statuses = {
+    running: "running",
+    paused: "paused",
+    stopped: "stopped",
+  };
+
   // make ts stop crying
   const [locationHistory, setHistory] = useState([]);
   const [distance, setDistance] = useState(0);
-  const [tempo, setTempo] = useState(Number);
+  const [tempo, setTempo] = useState(0);
+  //const [seconds, setSeconds] = useState(0);
   const [prevLocation, setPrevLocation] = useState();
+  const [status, setStatus] = useState(statuses.stopped);
+  const stopwatch = useStopwatch();
 
   const requestPermissions = async () => {
     const { status: foregroundStatus } =
@@ -46,20 +56,47 @@ export const Gps = () => {
     console.log("Current distance: ", distance);
   };
 
+  const calculateTempo = (distance: number, time: number) => {
+    time = time / 1000 / 60;
+    if (Number.isNaN((distance / time)) ) {
+      return 0
+    }
+    return distance / time;
+  };
+
   const start = async () => {
-    console.log("starting tracking");
-    await Location.startLocationUpdatesAsync(LOCATION_TASK, {
-      accuracy: Location.Accuracy.BestForNavigation,
-    });
-    console.log("tracking started");
+    if (status !== statuses.running) {
+      setStatus(statuses.running);
+      console.log("starting tracking");
+      await Location.startLocationUpdatesAsync(LOCATION_TASK, {
+        accuracy: Location.Accuracy.BestForNavigation,
+      });
+      console.log("tracking started");
+
+      stopwatch.start();
+    }
+  };
+
+  const pause = async () => {
+    if (status !== statuses.paused) {
+      if (status !== statuses.stopped) {
+        await Location.stopLocationUpdatesAsync(LOCATION_TASK);
+      }
+      setStatus(statuses.paused);
+
+      stopwatch.pause();
+    }
   };
 
   const stop = async () => {
-    // gives a promise rejection when LOCATION_TASK is cancelled
-    console.log("stopping tracking");
-    await Location.stopLocationUpdatesAsync(LOCATION_TASK);
-    console.log("tracking stopped");
-    console.log(JSON.stringify(locationHistory));
+    if (status !== statuses.stopped) {
+      if (status !== statuses.paused) {
+        await Location.stopLocationUpdatesAsync(LOCATION_TASK);
+      }
+      setStatus(statuses.stopped);
+      setDistance(0);
+      stopwatch.stop();
+    }
   };
 
   TaskManager.defineTask(LOCATION_TASK, ({ data, error }) => {
@@ -82,11 +119,21 @@ export const Gps = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={start}>
-        <Text style={styles.button}>start tracking</Text>
+        <Text style={styles.button}>start</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={pause}>
+        <Text style={styles.button}>pause</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={stop}>
-        <Text style={styles.button}>stop tracking</Text>
+        <Text style={styles.button}>stop</Text>
       </TouchableOpacity>
+      <Text style={styles.button}>km: {distance.toFixed(2)}</Text>
+      <Text style={styles.button}>
+        km/min: {(calculateTempo(distance, stopwatch.getElapsedStartedTime())).toFixed(2)}
+      </Text>
+      <Text style={styles.button}>
+        time: {(stopwatch.getElapsedStartedTime() / 1000).toFixed(0)}
+      </Text>
     </View>
   );
 };
@@ -99,7 +146,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   button: {
-    fontSize: 24,
+    fontSize: 30,
     textAlign: "center",
     backgroundColor: "lightgrey",
     margin: 10,
