@@ -38,6 +38,12 @@ export const EditTask = (props: { navigation: any }) => {
     saveCountables(newState);
   };
 
+  const deleteTask = (index: number) => {
+    const newState = [...countables];
+    newState.splice(index, 1);
+    saveCountables(newState);
+  };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -56,7 +62,12 @@ export const EditTask = (props: { navigation: any }) => {
           props.navigation.navigate("Tasks")
         )}
       >
-        <Text>Save</Text>
+        <Text style={styles.text}>Save</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => (deleteTask(index), props.navigation.navigate("Tasks"))}
+      >
+        <Text style={styles.text}>Delete</Text>
       </TouchableOpacity>
     </View>
   );
@@ -68,5 +79,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 40,
+    margin: 5,
   },
 });
