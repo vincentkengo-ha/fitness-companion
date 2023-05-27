@@ -4,5 +4,10 @@ add new countable in CreateTask
 make the Run screen
 
 Porblems:
-    how to reload Tasks screen after pressing save in CreateTask
+    post run screen:
+        display tempo 
+        save distance
+        time
+        ambition:
+            show how tempo and step frequency changes with time
     fix ts errors

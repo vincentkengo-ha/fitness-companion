@@ -12,3 +12,10 @@ export type Countable = {
   count: number;
   description?: string;
 }
+
+export type Run = {
+  time: number;
+  duration: number;
+  tempo: number;
+  distance: number;
+}

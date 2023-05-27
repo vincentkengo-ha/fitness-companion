@@ -2,10 +2,12 @@ import { useState, useEffect, Component } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
-import { getDistanceFromLatLonInKm } from "../utils/getDistance";
 import { useStopwatch } from "react-use-precision-timer";
 
-export const Gps = () => {
+import { getDistanceFromLatLonInKm } from "../utils/getDistance";
+import { Run } from "../utils/vars";
+
+export const Gps = (props: { navigation: any }) => {
   const LOCATION_TASK = "background-location-task";
 
   const statuses = {
@@ -58,8 +60,8 @@ export const Gps = () => {
 
   const calculateTempo = (distance: number, time: number) => {
     time = time / 1000 / 60;
-    if (Number.isNaN((distance / time)) ) {
-      return 0
+    if (Number.isNaN(distance / time)) {
+      return 0;
     }
     return distance / time;
   };
@@ -93,9 +95,15 @@ export const Gps = () => {
       if (status !== statuses.paused) {
         await Location.stopLocationUpdatesAsync(LOCATION_TASK);
       }
+      props.navigation.navigate("PostRun", {
+        duration: stopwatch.getElapsedStartedTime(),
+        distance: distance,
+        tempo: calculateTempo(distance, stopwatch.getElapsedStartedTime()),
+      });
       setStatus(statuses.stopped);
       setDistance(0);
       stopwatch.stop();
+      console.log("stop method successfully executed");
     }
   };
 
@@ -129,7 +137,8 @@ export const Gps = () => {
       </TouchableOpacity>
       <Text style={styles.button}>km: {distance.toFixed(2)}</Text>
       <Text style={styles.button}>
-        km/min: {(calculateTempo(distance, stopwatch.getElapsedStartedTime())).toFixed(2)}
+        km/min:{" "}
+        {calculateTempo(distance, stopwatch.getElapsedStartedTime()).toFixed(2)}
       </Text>
       <Text style={styles.button}>
         time: {(stopwatch.getElapsedStartedTime() / 1000).toFixed(0)}
