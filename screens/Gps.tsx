@@ -5,7 +5,7 @@ import * as TaskManager from "expo-task-manager";
 import { useStopwatch } from "react-use-precision-timer";
 
 import { getDistanceFromLatLonInKm } from "../utils/getDistance";
-import { Run } from "../utils/vars";
+import { Run, formatTime } from "../utils/vars";
 
 export const Gps = (props: { navigation: any }) => {
   const LOCATION_TASK = "background-location-task";
@@ -99,6 +99,7 @@ export const Gps = (props: { navigation: any }) => {
         duration: stopwatch.getElapsedStartedTime(),
         distance: distance,
         tempo: calculateTempo(distance, stopwatch.getElapsedStartedTime()),
+        time: formatTime(new Date()),
       });
       setStatus(statuses.stopped);
       setDistance(0);
