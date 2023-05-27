@@ -8,11 +8,9 @@ import {
   Platform,
   Text,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { CheckTask } from "../components/CheckTask";
 import { TaskRow } from "../components/TaskRow";
 import { loadCountables, saveCountables } from "../storage/Storage";
 
@@ -49,12 +47,6 @@ export const Tasks = (props: { navigation: any }) => {
       return;
     }
     newState[index].count += amount;
-    setCountables(newState);
-    saveCountables(newState);
-  };
-
-  const removeCountable = (name: string) => {
-    const newState = countables.filter((filtered) => filtered.name !== name);
     setCountables(newState);
     saveCountables(newState);
   };

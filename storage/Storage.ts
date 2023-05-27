@@ -17,22 +17,26 @@ export const loadCountables = async () => {
   }
 };
 
-export const saveRun = async (run: Run) => {
-  const items = await AsyncStorage.getItem("runs");
-  var runs = [];
-  if (items) {
-    runs = JSON.parse(items);
-  } 
-  runs.add(run);
-  const jsonRuns = JSON.stringify(runs);
-  await AsyncStorage.setItem("runs", jsonRuns);
+export const saveRuns = async (runs: Run[]) => {
+  const jsonCountables = JSON.stringify(runs);
+  await AsyncStorage.setItem("runs", jsonCountables);
 };
 
-export const getRuns = async () => {
+export const saveRun = async (run: Run) => {
+  var runs: Run[] = [];
+  // result is stuck in scope
+  loadRuns().then((result) => runs = result);
+  console.log(runs);
+  runs = [...runs, run];
+  const jsonCountables = JSON.stringify(runs);
+  await AsyncStorage.setItem("runs", jsonCountables);
+};
+
+export const loadRuns = async () => {
   const result = await AsyncStorage.getItem("runs");
   if (result) {
     return JSON.parse(result);
   } else {
     return [];
   }
-}
+};

@@ -1,11 +1,11 @@
-import { useState, useEffect, Component } from "react";
+import { useState, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
 import { useStopwatch } from "react-use-precision-timer";
 
 import { getDistanceFromLatLonInKm } from "../utils/getDistance";
-import { Run, formatTime } from "../utils/vars";
+import { formatTime } from "../utils/vars";
 
 export const Gps = (props: { navigation: any }) => {
   const LOCATION_TASK = "background-location-task";
