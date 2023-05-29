@@ -6,7 +6,7 @@ import { CreateTask } from "./screens/CreateTask";
 import { EditTask } from "./screens/EditTask";
 import { Gps } from "./screens/Gps";
 import { PostRun } from "./screens/PostRun";
-
+import { StatsPage } from "./screens/StatsPage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -19,6 +19,7 @@ export default function App() {
         <Stack.Screen name="EditTask" component={EditTask} />
         <Stack.Screen name="Gps" component={Gps} />
         <Stack.Screen name="PostRun" component={PostRun} />
+        <Stack.Screen name="StatsPage" component={StatsPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -29,3 +29,8 @@ export type Run = {
   tempo: number;
   distance: number;
 };
+
+export type Stats = {
+  distance: number; 
+  duration: number;
+};

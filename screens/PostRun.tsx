@@ -2,17 +2,22 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useState, useEffect } from "react";
 
-import { Run } from "../utils/vars";
-import { saveRun, loadRuns, saveRuns } from "../storage/Storage";
+import { Run, Stats } from "../utils/vars";
+import { loadRuns, saveRuns, loadStats, saveStats } from "../storage/Storage";
 
-export const PostRun = () => {
+export const PostRun = (props: { navigation: any }) => {
   const [runs, setRuns] = useState([]);
+  const [stats, setStats] = useState({
+    distance: 0,
+    duration: 0,
+  });
   const route = useRoute();
   // @ts-ignore
   const { duration, distance, tempo, time } = route.params;
 
   useEffect(() => {
     loadRuns().then((result) => setRuns(result));
+    loadStats().then((result) => setStats(result));
   }, []);
 
   const save = () => {
@@ -24,6 +29,14 @@ export const PostRun = () => {
     };
     const newState = [...runs, run];
     saveRuns(newState);
+
+    const newStats: Stats = {
+      distance: stats.distance + distance,
+      duration: stats.duration + duration,
+    };
+    saveStats(newStats);
+    loadStats().then((result) => setStats(result));
+    props.navigation.navigate("StatsPage");
   };
 
   return (

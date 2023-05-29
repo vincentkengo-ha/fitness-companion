@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Run } from "../utils/vars";
+import { Run, Stats } from "../utils/vars";
+import { StatusBar } from "react-native/types";
 
 export const saveCountables = async (countables: any) => {
   const jsonCountables = JSON.stringify(countables);
@@ -25,7 +26,7 @@ export const saveRuns = async (runs: Run[]) => {
 export const saveRun = async (run: Run) => {
   var runs: Run[] = [];
   // result is stuck in scope
-  loadRuns().then((result) => runs = result);
+  loadRuns().then((result) => (runs = result));
   console.log(runs);
   runs = [...runs, run];
   const jsonCountables = JSON.stringify(runs);
@@ -34,6 +35,20 @@ export const saveRun = async (run: Run) => {
 
 export const loadRuns = async () => {
   const result = await AsyncStorage.getItem("runs");
+  if (result) {
+    return JSON.parse(result);
+  } else {
+    return [];
+  }
+};
+
+export const saveStats = async (stats: Stats) => {
+  const jsonDistance = JSON.stringify(stats);
+  await AsyncStorage.setItem("stats", jsonDistance);
+};
+
+export const loadStats = async () => {
+  const result = await AsyncStorage.getItem("stats");
   if (result) {
     return JSON.parse(result);
   } else {
