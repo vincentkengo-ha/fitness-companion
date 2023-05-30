@@ -45,7 +45,9 @@ export const Gps = (props: { navigation: any }) => {
     var dist = 0;
     if (prevLocation) {
       dist = getDistanceFromLatLonInKm(
+        // @ts-ignore
         prevLocation.locations[0].coords.latitude,
+        // @ts-ignore
         prevLocation.locations[0].coords.longitude,
         location.locations[0].coords.latitude,
         location.locations[0].coords.longitude
@@ -115,10 +117,12 @@ export const Gps = (props: { navigation: any }) => {
     if (data) {
       const newState = [...locationHistory, data];
       //stop crying ts
+      // @ts-ignore
       setHistory(newState);
       calculateDistance(data);
       // console.log(JSON.stringify(locations));
       // do something with the locations captured in the background
+      // @ts-ignore
       setPrevLocation(data);
     }
   });
