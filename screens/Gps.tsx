@@ -19,8 +19,6 @@ export const Gps = (props: { navigation: any }) => {
   // make ts stop crying
   const [locationHistory, setHistory] = useState([]);
   const [distance, setDistance] = useState(0);
-  const [tempo, setTempo] = useState(0);
-  //const [seconds, setSeconds] = useState(0);
   const [prevLocation, setPrevLocation] = useState();
   const [status, setStatus] = useState(statuses.stopped);
   const stopwatch = useStopwatch();

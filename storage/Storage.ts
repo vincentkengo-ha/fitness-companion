@@ -36,6 +36,7 @@ export const saveRun = async (run: Run) => {
 export const loadRuns = async () => {
   const result = await AsyncStorage.getItem("runs");
   if (result) {
+    //console.log(result);
     return JSON.parse(result);
   } else {
     return [];

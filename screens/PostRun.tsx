@@ -36,7 +36,7 @@ export const PostRun = (props: { navigation: any }) => {
     };
     saveStats(newStats);
     loadStats().then((result) => setStats(result));
-    props.navigation.navigate("StatsPage");
+    props.navigation.navigate("StatsPage", {newState});
   };
 
   return (

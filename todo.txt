@@ -11,3 +11,10 @@ Porblems:
         ambition:
             show how tempo and step frequency changes with time
     fix ts errors
+
+    runs[runs.length].tempo,
+                  runs[runs.length - 1].tempo,
+                  runs[runs.length - 2].tempo,
+                  runs[runs.length - 3].tempo,
+                  runs[runs.length - 4].tempo,
+                  runs[runs.length - 5].tempo,
